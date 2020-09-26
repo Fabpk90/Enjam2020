@@ -123,8 +123,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4059390252547545521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a34cf4540d4db64a84c55094d2a3e94, type: 3}
+  m_Script: {fileID: 11500000, guid: da5968ad0edf7164fbc6d2fc3204d380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  turnSpeed: 70
+  turnSpeed: 30
