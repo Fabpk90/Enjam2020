@@ -92,8 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4011990485559768469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23988a1ba481ece4aa1ff296a73730ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 94dbbce6fe5109949832f5381f06aa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  lifeTime: 0.8
+  lifeTime: 0.5
