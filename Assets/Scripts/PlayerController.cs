@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float animationSpeed = 1;
 
     private CooldownTimer timer;
+
+    private CooldownTimer timerSexyStare;
     
     private float projectilesLeft = 5;
     [Header("Shooting")] 
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float flyAwaySpeed = 4;
     [SerializeField] private float speed = 2;
     [SerializeField] private float speedDecreaseRate = 1;
+    private static readonly int SexyStare = Animator.StringToHash("SexyStare");
 
     // Start is called before the first frame update
     private void Start()
@@ -49,6 +53,15 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Shit"].performed += OnShitting;
         _input.currentActionMap["Fly"].performed += OnFly;
         _input.currentActionMap["Restart"].performed += OnRestart;
+        
+        timerSexyStare = new CooldownTimer(5.0f);
+        timerSexyStare.TimerCompleteEvent += () =>
+        {
+            if(Random.value > 0.5f && !_flying)
+                anim.SetTrigger(SexyStare);
+            timerSexyStare.Start();
+        };
+        timerSexyStare.Start();
     }
 
     private void OnRestart(InputAction.CallbackContext obj)
@@ -125,6 +138,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("Speed", _velocity.y * animationSpeed);
         timer.Update(Time.deltaTime);
+        timerSexyStare.Update(Time.deltaTime);
         if (!_flying)
         {
             transform.Rotate(Vector3.forward * (groundTurnSpeed * Time.deltaTime * _velocity.x));
