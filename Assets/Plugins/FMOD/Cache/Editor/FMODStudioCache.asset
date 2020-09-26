@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3996397312027236901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/ENJAMFmod/ENJAM2020/Build/Desktop/Master.bank
+  Name: Master
+  lastModified: 637367386288249225
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,16 +31,16 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 1735182235178668251}
-  - {fileID: 7093326164516504906}
+  - {fileID: 8095745776283987255}
+  - {fileID: -3996397312027236901}
   EditorEvents:
   - {fileID: 1313686104593167482}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 7093326164516504906}
+  - {fileID: -3996397312027236901}
   StringsBanks:
-  - {fileID: 1735182235178668251}
-  stringsBankWriteTime: 637367376258562021
+  - {fileID: 8095745776283987255}
+  stringsBankWriteTime: 637367386288319057
   cacheVersion: 5
 --- !u!114 &1313686104593167482
 MonoBehaviour:
@@ -39,7 +57,7 @@ MonoBehaviour:
   Path: event:/Test
   guid: 11345eadd90e1d4e9a9fc75e9aebb684
   Banks:
-  - {fileID: 7093326164516504906}
+  - {fileID: -3996397312027236901}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -84,4 +102,24 @@ MonoBehaviour:
   lastModified: 637367376258502184
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &8095745776283987255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/ENJAMFmod/ENJAM2020/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  lastModified: 637367386288319057
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 742
   Exists: 1
