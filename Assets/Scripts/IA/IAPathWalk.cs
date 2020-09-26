@@ -14,6 +14,8 @@ namespace UnityTemplateProjects.IA
         public float movementSpeed;
 
         private Animator _stateMachine;
+        private static readonly int ArrivedAtPoint = Animator.StringToHash("ArrivedAtPoint");
+
         private void Start()
         {
             _stateMachine = GetComponent<Animator>();
@@ -24,7 +26,10 @@ namespace UnityTemplateProjects.IA
 
         private void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _nextPosition, Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _nextPosition, Time.deltaTime * movementSpeed);
+            
+            if(Vector3.Distance(transform.position, _nextPosition) < 0.25f)
+                _stateMachine.SetTrigger(ArrivedAtPoint);
         }
 
         public void ChooseNextPoint()
