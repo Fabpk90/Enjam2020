@@ -27,15 +27,17 @@ public class Projectile : MonoBehaviour
         _currentLifeTime -= Time.deltaTime;
         if (_currentLifeTime < 0)
         {
+            Collider2D people = Physics2D.OverlapCircle(transform.position, sprite.size.x * 0.5f, peopleToShitOn);
             //Collision with people
-            if (Physics2D.OverlapCircle(transform.position, sprite.size.x * 0.5f,peopleToShitOn ))
+            if (people)
             {
-                print("360 NO SCOPE");
+                Color color = people.gameObject.GetComponent<SpriteRenderer>().color;
+                people.gameObject.GetComponent<SpriteRenderer>().color = color == Color.red ? Color.yellow : Color.red;
             }
             Destroy(transform.gameObject);
             return;
         }
         transform.Translate(new Vector3(_velocity.x, _velocity.y, 0) * Time.deltaTime);
-        transform.localScale = Vector3.one * Mathf.Lerp(2.5f, 0.5f, 1 - (_currentLifeTime / lifeTime));
+        transform.localScale = Vector3.one * Mathf.Lerp(5f, 2f, 1 - (_currentLifeTime / lifeTime));
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -11,11 +12,13 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _input;
     private Vector2 _velocity = Vector2.zero;
     private bool _flying;
-    
-    private float projectilesLeft = 5;
+
+    private Animator anim;
+    [SerializeField] private float animationSpeed = 1;
 
     private CooldownTimer timer;
-
+    
+    private float projectilesLeft = 5;
     [Header("Shooting")] 
     [SerializeField] private float cooldownShoot = 3;
     private Transform _target;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        anim = GetComponent<Animator>();
         _target = transform.GetChild(0).transform;
         timer = new CooldownTimer(0);
         _input = GetComponent<PlayerInput>();
@@ -44,6 +48,12 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Move"].canceled += OnMove;
         _input.currentActionMap["Shit"].performed += OnShitting;
         _input.currentActionMap["Fly"].performed += OnFly;
+        _input.currentActionMap["Restart"].performed += OnRestart;
+    }
+
+    private void OnRestart(InputAction.CallbackContext obj)
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void OnFly (InputAction.CallbackContext obj)
@@ -51,6 +61,7 @@ public class PlayerController : MonoBehaviour
         if (_flying) return;
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
+        anim.SetBool("Flying", true);
     }
 
     private void OnShitting (InputAction.CallbackContext obj)
@@ -75,6 +86,7 @@ public class PlayerController : MonoBehaviour
     private void OnFlapRight(InputAction.CallbackContext obj)
     {
         if (!_flying) return;
+        anim.SetTrigger("Turning");
         _velocity.x += turnSpeed;
         _velocity.y += speed;
     }
@@ -82,6 +94,7 @@ public class PlayerController : MonoBehaviour
     private void OnFlapLeft(InputAction.CallbackContext obj)
     {
         if (!_flying) return;
+        anim.SetTrigger("Turning");
         _velocity.x += -turnSpeed;
         _velocity.y += speed;
 
@@ -94,6 +107,7 @@ public class PlayerController : MonoBehaviour
         projectilesLeft = maxProjectiles;
         _flying = false;
         _velocity = Vector2.zero;
+        anim.SetBool("Flying", false);
         print("platform touched");
     }
 
@@ -102,12 +116,14 @@ public class PlayerController : MonoBehaviour
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
+        anim.SetBool("Flying", true);
         print("platform left");
     }
 
     // Update is called once per frame
     private void Update()
     {
+        anim.SetFloat("Speed", _velocity.y * animationSpeed);
         timer.Update(Time.deltaTime);
         if (!_flying)
         {
@@ -123,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _target.position = transform.position;
-        _target.Translate(new Vector3(0,Mathf.Max(_velocity.y, 1), 0) * range);
+        _target.Translate(new Vector3(0,Mathf.Max(0, 1), 0) * range);
 
     }
     private void OnDrawGizmos()
