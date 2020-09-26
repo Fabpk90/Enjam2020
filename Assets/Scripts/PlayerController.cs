@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Shooting")] 
     [SerializeField] private float cooldownShoot = 3;
-    public Transform target;
+    private Transform _target;
     public GameObject projectilePrefab;
     [SerializeField] private float maxProjectiles = 5;
     [SerializeField] private float range = 1;
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        _target = transform.GetChild(0).transform;
         timer = new CooldownTimer(0);
         _input = GetComponent<PlayerInput>();
         _input.currentActionMap["FlapLeft"].performed += OnFlapLeft;
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         Projectile p = projectile.GetComponent<Projectile>();
         if (p != null)
         {
-            p.targetPosition = target.transform.position;
+            p.targetPosition = _target.transform.position;
         }
     }
 
@@ -88,6 +89,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
+            
         projectilesLeft = maxProjectiles;
         _flying = false;
         _velocity = Vector2.zero;
@@ -96,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
         print("platform left");
@@ -118,8 +122,8 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.up * (speed * Time.deltaTime * _velocity.y));
         }
 
-        target.position = transform.position;
-        target.Translate(new Vector3(0,Mathf.Max(_velocity.y, 1), 0) * range);
+        _target.position = transform.position;
+        _target.Translate(new Vector3(0,Mathf.Max(_velocity.y, 1), 0) * range);
 
     }
     private void OnDrawGizmos()
