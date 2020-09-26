@@ -10,9 +10,20 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInput _input;
     private Vector2 _velocity = Vector2.zero;
-    private bool _flying = false;
-    private Rigidbody2D _rb;
+    private bool _flying;
     
+    private float projectilesLeft = 5;
+
+    private CooldownTimer timer;
+
+    [Header("Shooting")] 
+    [SerializeField] private float cooldownShoot = 3;
+    public Transform target;
+    public GameObject projectilePrefab;
+    [SerializeField] private float maxProjectiles = 5;
+    [SerializeField] private float range = 1;
+    
+    [Header("Movement")]
     [SerializeField] private float groundSpeed = 2;
     [SerializeField] private float groundTurnSpeed = 100;
     [SerializeField] private float turnSpeed = 30;
@@ -24,12 +35,35 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        timer = new CooldownTimer(0);
         _input = GetComponent<PlayerInput>();
         _input.currentActionMap["FlapLeft"].performed += OnFlapLeft;
         _input.currentActionMap["FlapRight"].performed += OnFlapRight;
         _input.currentActionMap["Move"].performed += OnMove;
         _input.currentActionMap["Move"].canceled += OnMove;
+        _input.currentActionMap["Shit"].performed += OnShitting;
+        _input.currentActionMap["Fly"].performed += OnFly;
+    }
+
+    private void OnFly (InputAction.CallbackContext obj)
+    {
+        if (_flying) return;
+        _flying = true;
+        _velocity = Vector2.up * flyAwaySpeed;
+    }
+
+    private void OnShitting (InputAction.CallbackContext obj)
+    {
+        if (!_flying || projectilesLeft == 0 || !timer.IsCompleted) return;
+        timer.Start(cooldownShoot);
+        projectilesLeft--;
+        GameObject projectile = Instantiate(projectilePrefab) as GameObject;;
+        projectile.transform.position = transform.position;
+        Projectile p = projectile.GetComponent<Projectile>();
+        if (p != null)
+        {
+            p.targetPosition = target.transform.position;
+        }
     }
 
     private void OnMove(InputAction.CallbackContext obj)
@@ -54,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        projectilesLeft = maxProjectiles;
         _flying = false;
         _velocity = Vector2.zero;
         print("platform touched");
@@ -69,6 +104,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        timer.Update(Time.deltaTime);
         if (!_flying)
         {
             transform.Rotate(Vector3.forward * (groundTurnSpeed * Time.deltaTime * _velocity.x));
@@ -81,7 +117,9 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(Vector3.forward * (turnSpeed * Time.deltaTime * _velocity.x));
             transform.Translate(Vector3.up * (speed * Time.deltaTime * _velocity.y));
         }
-        
+
+        target.position = transform.position;
+        target.Translate(new Vector3(0,Mathf.Max(_velocity.y, 1), 0) * range);
 
     }
     private void OnDrawGizmos()

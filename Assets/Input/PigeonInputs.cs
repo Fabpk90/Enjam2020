@@ -35,7 +35,7 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fly"",
+                    ""name"": ""Shit"",
                     ""type"": ""Button"",
                     ""id"": ""7e24b9c9-a5a0-4e02-b428-9f04da28b4d1"",
                     ""expectedControlType"": ""Button"",
@@ -49,6 +49,14 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fly"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6de0b1b-8594-477d-a76d-bf42d1b94f0b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -59,7 +67,7 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Fly"",
+                    ""action"": ""Shit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -137,6 +145,17 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""FlapRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""635ff1b8-9487-4ec5-810e-15491edae39b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Fly"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -716,8 +735,9 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_FlapLeft = m_Player.FindAction("FlapLeft", throwIfNotFound: true);
         m_Player_FlapRight = m_Player.FindAction("FlapRight", throwIfNotFound: true);
-        m_Player_Fly = m_Player.FindAction("Fly", throwIfNotFound: true);
+        m_Player_Shit = m_Player.FindAction("Shit", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Fly = m_Player.FindAction("Fly", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -781,16 +801,18 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_FlapLeft;
     private readonly InputAction m_Player_FlapRight;
-    private readonly InputAction m_Player_Fly;
+    private readonly InputAction m_Player_Shit;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Fly;
     public struct PlayerActions
     {
         private @PigeonInputs m_Wrapper;
         public PlayerActions(@PigeonInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @FlapLeft => m_Wrapper.m_Player_FlapLeft;
         public InputAction @FlapRight => m_Wrapper.m_Player_FlapRight;
-        public InputAction @Fly => m_Wrapper.m_Player_Fly;
+        public InputAction @Shit => m_Wrapper.m_Player_Shit;
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Fly => m_Wrapper.m_Player_Fly;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -806,12 +828,15 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
                 @FlapRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlapRight;
                 @FlapRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlapRight;
                 @FlapRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlapRight;
-                @Fly.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFly;
-                @Fly.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFly;
-                @Fly.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFly;
+                @Shit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShit;
+                @Shit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShit;
+                @Shit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShit;
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Fly.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFly;
+                @Fly.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFly;
+                @Fly.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFly;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -822,12 +847,15 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
                 @FlapRight.started += instance.OnFlapRight;
                 @FlapRight.performed += instance.OnFlapRight;
                 @FlapRight.canceled += instance.OnFlapRight;
-                @Fly.started += instance.OnFly;
-                @Fly.performed += instance.OnFly;
-                @Fly.canceled += instance.OnFly;
+                @Shit.started += instance.OnShit;
+                @Shit.performed += instance.OnShit;
+                @Shit.canceled += instance.OnShit;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Fly.started += instance.OnFly;
+                @Fly.performed += instance.OnFly;
+                @Fly.canceled += instance.OnFly;
             }
         }
     }
@@ -986,8 +1014,9 @@ public class @PigeonInputs : IInputActionCollection, IDisposable
     {
         void OnFlapLeft(InputAction.CallbackContext context);
         void OnFlapRight(InputAction.CallbackContext context);
-        void OnFly(InputAction.CallbackContext context);
+        void OnShit(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnFly(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

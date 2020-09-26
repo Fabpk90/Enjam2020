@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Fly",
+                    "name": "Shit",
                     "type": "Button",
                     "id": "7e24b9c9-a5a0-4e02-b428-9f04da28b4d1",
                     "expectedControlType": "Button",
@@ -36,6 +36,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Fly",
+                    "type": "Button",
+                    "id": "d6de0b1b-8594-477d-a76d-bf42d1b94f0b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -46,7 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Fly",
+                    "action": "Shit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "FlapRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "635ff1b8-9487-4ec5-810e-15491edae39b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fly",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
