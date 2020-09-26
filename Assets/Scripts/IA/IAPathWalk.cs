@@ -18,6 +18,7 @@ namespace UnityTemplateProjects.IA
             dstTravelled += movementSpeed * Time.deltaTime;
             transform.position = path.path.GetPointAtDistance(dstTravelled, endAction);
             transform.rotation = path.path.GetRotationAtDistance(dstTravelled, endAction);
+            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
         }
     }
 }
