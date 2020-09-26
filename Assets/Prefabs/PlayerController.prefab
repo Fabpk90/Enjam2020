@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4059390252547545522}
   - component: {fileID: 4059390252547545533}
   - component: {fileID: 4059390252547545532}
+  - component: {fileID: -3845786272559550724}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -123,8 +124,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 4059390252547545521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a34cf4540d4db64a84c55094d2a3e94, type: 3}
+  m_Script: {fileID: 11500000, guid: ae98e16a2ef951a4d8e659917bbae353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _velocity: {x: 0, y: 0}
+  groundSpeed: 2
+  turnSpeed: 30
+  turnSpeedDecreaseRate: 1
   speed: 2
-  turnSpeed: 70
+  speedDecreaseRate: 1
+  landingDecreaseRate: 4
+--- !u!50 &-3845786272559550724
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4059390252547545521}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
