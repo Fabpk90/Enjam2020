@@ -1476,6 +1476,10 @@ PrefabInstance:
       propertyPath: poopManager
       value: 
       objectReference: {fileID: 2142620104}
+    - target: {fileID: 4059390252547545532, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
+      propertyPath: reloadTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4209034890401129633, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
