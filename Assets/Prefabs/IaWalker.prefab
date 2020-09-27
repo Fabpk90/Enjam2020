@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 2651801603661038921}
   - component: {fileID: 8739244802455359826}
   - component: {fileID: 6025302799419434260}
+  - component: {fileID: 132612269805135052}
   m_Layer: 0
   m_Name: NPCAnim
   m_TagString: Untagged
@@ -441,3 +442,16 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &132612269805135052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986770682738071955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28d141de735b4047b2e4a1c54061a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepsEvent: event:/SFX/Ennemies/NPC_Footsteps
