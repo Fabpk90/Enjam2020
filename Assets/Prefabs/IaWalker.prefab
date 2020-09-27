@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   movementSpeed: 2
+  timerCooldown: 0
   endAction: 0
 --- !u!61 &1274863871
 BoxCollider2D:
@@ -122,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7986770682738071955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.55686754, y: 0.020158498, z: -0.030237427}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.13596933, y: 0.13596933, z: 0.13596933}
   m_Children: []
   m_Father: {fileID: 2593566848641768807}

@@ -25,7 +25,8 @@ namespace UnityTemplateProjects.IA
         private void Start()
         {
             _animator = GetComponentInChildren<Animator>();
-            GetComponentInChildren<SpriteRenderer>().color = Random.ColorHSV();
+            GetComponentInChildren<SpriteRenderer>().color 
+                = Random.ColorHSV(0, 1, 0, 1, .5f, 1f);
             
             _animator.SetFloat(Speed, .50f);
             
@@ -35,6 +36,8 @@ namespace UnityTemplateProjects.IA
                 _isAfraid = false;
                 _animator.SetFloat(Speed, .50f);
             };
+            
+            MakeHimAfraid();
         }
 
         public void MakeHimAfraid()
@@ -46,6 +49,7 @@ namespace UnityTemplateProjects.IA
 
         private void Update()
         {
+            _timerAfraid.Update(Time.deltaTime);
             dstTravelled += (_isAfraid ? movementSpeed * 2.0f : movementSpeed) * Time.deltaTime;
             var newPos = path.path.GetPointAtDistance(dstTravelled, endAction);
             var direction = (newPos - transform.position).normalized;
