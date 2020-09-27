@@ -1,6 +1,7 @@
 ﻿using System;
 using PathCreation;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace UnityTemplateProjects.IA
 {
@@ -10,14 +11,47 @@ namespace UnityTemplateProjects.IA
 
         public float movementSpeed;
         float dstTravelled;
+
+        private bool _isAfraid;
+        private CooldownTimer _timerAfraid;
+
+        public float timerCooldown;
         
         public EndOfPathInstruction endAction;
 
+        private Animator _animator;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
+        private void Start()
+        {
+            _animator = GetComponentInChildren<Animator>();
+            GetComponentInChildren<SpriteRenderer>().color = Random.ColorHSV();
+            
+            _animator.SetFloat(Speed, .50f);
+            
+            _timerAfraid = new CooldownTimer(timerCooldown);
+            _timerAfraid.TimerCompleteEvent += () =>
+            {
+                _isAfraid = false;
+                _animator.SetFloat(Speed, .50f);
+            };
+        }
+
+        public void MakeHimAfraid()
+        {
+            _timerAfraid.Start();
+            _isAfraid = true;
+            _animator.SetFloat(Speed, 1.0f);
+        }
+
         private void Update()
         {
-            dstTravelled += movementSpeed * Time.deltaTime;
-            transform.position = path.path.GetPointAtDistance(dstTravelled, endAction);
-            transform.rotation = path.path.GetRotationAtDistance(dstTravelled, endAction);
+            dstTravelled += (_isAfraid ? movementSpeed * 2.0f : movementSpeed) * Time.deltaTime;
+            var newPos = path.path.GetPointAtDistance(dstTravelled, endAction);
+            var direction = (newPos - transform.position).normalized;
+
+            transform.position = newPos;
+            transform.right = direction;
             transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
         }
     }
