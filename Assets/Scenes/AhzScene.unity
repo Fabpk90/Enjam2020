@@ -1457,7 +1457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059390252547545523, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4059390252547545532, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
       propertyPath: poopManager
@@ -1467,8 +1467,30 @@ PrefabInstance:
       propertyPath: minimumSpeed
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1896290575, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
+--- !u!1 &1896290574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4059390252547545521, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
+  m_PrefabInstance: {fileID: 1618552232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1896290575
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896290574}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.08271384}
+  serializedVersion: 2
+  m_Radius: 0.58662224
 --- !u!4 &1896290580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4059390252547545523, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
@@ -1502,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 232730992}
     - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
       propertyPath: initialCountdown
-      value: 30
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
       propertyPath: additionalTime

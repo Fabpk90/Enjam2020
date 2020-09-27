@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _anim = GetComponent<Animator>();
+        _anim = GetComponentInChildren<Animator>();
         _target = transform.GetChild(0).transform;
         _timer = new CooldownTimer(0);
         _input = GetComponent<PlayerInput>();
