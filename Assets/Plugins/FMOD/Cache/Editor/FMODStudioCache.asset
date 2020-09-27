@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/SoundbankFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637367381477265912
+  lastModified: 637368184145854966
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 742
+    Value: 1082
   Exists: 1
 --- !u!114 &-3996397312027236901
 MonoBehaviour:
@@ -38,6 +38,139 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-3919795262787668920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Pigeon/SFX_Pigeon_ShitImpact
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Pigeon/SFX_Pigeon_ShitImpact
+  guid: fb18930070b31b43a6f2da8537be2fa5
+  Banks:
+  - {fileID: 2104915328634574843}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-3854380628243102338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Music_Intensity
+  m_EditorClassIdentifier: 
+  Name: Music_Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3807094040302406004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Music
+  guid: 7ebe14e05e84dc4283498201dd6c071a
+  Banks:
+  - {fileID: 2104915328634574843}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1869584641490628934}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 153874
+--- !u!114 &-3405753111331066847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Music_Intensity
+  m_EditorClassIdentifier: 
+  Name: Music_Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-994241027633747859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Amb/Amb_CityPark
+  m_EditorClassIdentifier: 
+  Path: event:/Amb/Amb_CityPark
+  guid: 28926ae5f17c7b46b2fe6abbb8215c86
+  Banks:
+  - {fileID: 2104915328634574843}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 76898
+--- !u!114 &-161113780861182163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Pigeon/SFX_Pigeon_Cooing
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Pigeon/SFX_Pigeon_Cooing
+  guid: 3a3628a739fe5e42a481aebbf9d67044
+  Banks:
+  - {fileID: 2104915328634574843}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,13 +187,17 @@ MonoBehaviour:
   - {fileID: -6039193742099347498}
   - {fileID: 2104915328634574843}
   EditorEvents:
-  - {fileID: 1313686104593167482}
+  - {fileID: -994241027633747859}
+  - {fileID: -161113780861182163}
+  - {fileID: 3173435048320909973}
+  - {fileID: -3807094040302406004}
+  - {fileID: -3919795262787668920}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2104915328634574843}
   StringsBanks:
   - {fileID: -6039193742099347498}
-  stringsBankWriteTime: 637367381477265912
+  stringsBankWriteTime: 637368184145854966
   cacheVersion: 5
 --- !u!114 &1313686104593167482
 MonoBehaviour:
@@ -105,6 +242,26 @@ MonoBehaviour:
   - Name: 
     Value: 742
   Exists: 1
+--- !u!114 &1869584641490628934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Music_Intensity
+  m_EditorClassIdentifier: 
+  Name: Music_Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2104915328634574843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,9 +276,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/SoundbankFmod/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637367381477809378
+  lastModified: 637368184145775186
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &3173435048320909973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Pigeon/SFX_Pigeon_Wings
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Pigeon/SFX_Pigeon_Wings
+  guid: 7c921a5e6b309a429b1ccba213b01249
+  Banks:
+  - {fileID: 2104915328634574843}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &7048221909650101557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Music_Intensity
+  m_EditorClassIdentifier: 
+  Name: Music_Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &7093326164516504906
 MonoBehaviour:
@@ -161,3 +361,23 @@ MonoBehaviour:
   - Name: Desktop
     Value: 742
   Exists: 1
+--- !u!114 &8743654060124127062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Music_Intensity
+  m_EditorClassIdentifier: 
+  Name: Music_Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
