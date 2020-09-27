@@ -16,7 +16,7 @@ namespace UnityTemplateProjects.IA
         private bool _isAfraid;
         private CooldownTimer _timerAfraid;
 
-        public float timerCooldown;
+        public float timerAfraidDuration;
         
         public EndOfPathInstruction endAction;
 
@@ -35,7 +35,7 @@ namespace UnityTemplateProjects.IA
             
             _animator.SetFloat(Speed, .50f);
             
-            _timerAfraid = new CooldownTimer(timerCooldown);
+            _timerAfraid = new CooldownTimer(timerAfraidDuration);
             _timerAfraid.TimerCompleteEvent += () =>
             {
                 _isAfraid = false;
