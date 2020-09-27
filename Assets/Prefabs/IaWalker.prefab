@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  hitEvent: event:/SFX/Ennemies/NPC_Hit
 --- !u!1 &7986770682738071955
 GameObject:
   m_ObjectHideFlags: 0

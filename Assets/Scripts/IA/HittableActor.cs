@@ -7,11 +7,20 @@ namespace IA
     {
         public int health;
         public EventHandler OnDeath;
-        
+
+        [FMODUnity.EventRef]
+        public string hitEvent;
+
+        private FMOD.Studio.EventInstance fmodinstance;
+
         public virtual void TakeDamage(int amount)
         {
-            if(health - amount <= 0)
+            if (health - amount <= 0)
+            {
                 Death();
+                fmodinstance = FMODUnity.RuntimeManager.CreateInstance(hitEvent);
+                fmodinstance.start();
+            }
             else
             {
                 health -= amount;
