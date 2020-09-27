@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,12 +14,18 @@ public class PlayerController : MonoBehaviour
     private Vector2 _velocity = Vector2.zero;
     private bool _flying;
 
-    private Animator anim;
+    private Animator _anim;
     [SerializeField] private float animationSpeed = 1;
 
-    private CooldownTimer timer;
+    private CooldownTimer _timer;
+    private CooldownTimer _timerSexyStare;
+
+    private CooldownTimer _timerReload;
+    public float reloadTime;
+
+    public PoopManager poopManager;
     
-    private float projectilesLeft = 5;
+    private float _projectilesLeft = 5;
     [Header("Shooting")] 
     [SerializeField] private float cooldownShoot = 3;
     private Transform _target;
@@ -34,13 +41,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float flyAwaySpeed = 4;
     [SerializeField] private float speed = 2;
     [SerializeField] private float speedDecreaseRate = 1;
+    private static readonly int SexyStare = Animator.StringToHash("SexyStare");
+    private static readonly int Flying = Animator.StringToHash("Flying");
+    private static readonly int Turning = Animator.StringToHash("Turning");
+    private static readonly int Speed = Animator.StringToHash("Speed");
 
     // Start is called before the first frame update
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
         _target = transform.GetChild(0).transform;
-        timer = new CooldownTimer(0);
+        _timer = new CooldownTimer(0);
         _input = GetComponent<PlayerInput>();
         _input.currentActionMap["FlapLeft"].performed += OnFlapLeft;
         _input.currentActionMap["FlapRight"].performed += OnFlapRight;
@@ -49,10 +60,32 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Shit"].performed += OnShitting;
         _input.currentActionMap["Fly"].performed += OnFly;
         _input.currentActionMap["Restart"].performed += OnRestart;
+        
+        _timerSexyStare = new CooldownTimer(5.0f, true);
+        _timerSexyStare.TimerCompleteEvent += () =>
+        {
+            if(Random.value > 0.5f && !_flying)
+                _anim.SetTrigger(SexyStare);
+        };
+        _timerSexyStare.Start();
+        
+        _timerReload = new CooldownTimer(reloadTime, true);
+        _timerReload.TimerCompleteEvent += () =>
+        {
+            if (poopManager.ReloadPoop())
+                _projectilesLeft++;
+        };
     }
 
     private void OnRestart(InputAction.CallbackContext obj)
     {
+        _input.currentActionMap["FlapLeft"].performed -= OnFlapLeft;
+        _input.currentActionMap["FlapRight"].performed -= OnFlapRight;
+        _input.currentActionMap["Move"].performed -= OnMove;
+        _input.currentActionMap["Move"].canceled -= OnMove;
+        _input.currentActionMap["Shit"].performed -= OnShitting;
+        _input.currentActionMap["Fly"].performed -= OnFly;
+        _input.currentActionMap["Restart"].performed -= OnRestart;
         SceneManager.LoadScene(0);
     }
 
@@ -61,14 +94,18 @@ public class PlayerController : MonoBehaviour
         if (_flying) return;
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
-        anim.SetBool("Flying", true);
+        _anim.SetBool(Flying, true);
     }
 
     private void OnShitting (InputAction.CallbackContext obj)
     {
-        if (!_flying || projectilesLeft == 0 || !timer.IsCompleted) return;
-        timer.Start(cooldownShoot);
-        projectilesLeft--;
+        if (!_flying || _projectilesLeft == 0 || !_timer.IsCompleted) return;
+        _timer.Start(cooldownShoot);
+        
+        poopManager.UsePoop();
+        
+        _projectilesLeft--;
+        
         GameObject projectile = Instantiate(projectilePrefab) as GameObject;;
         projectile.transform.position = transform.position;
         Projectile p = projectile.GetComponent<Projectile>();
@@ -86,7 +123,7 @@ public class PlayerController : MonoBehaviour
     private void OnFlapRight(InputAction.CallbackContext obj)
     {
         if (!_flying) return;
-        anim.SetTrigger("Turning");
+        _anim.SetTrigger(Turning);
         _velocity.x += turnSpeed;
         _velocity.y += speed;
     }
@@ -94,7 +131,7 @@ public class PlayerController : MonoBehaviour
     private void OnFlapLeft(InputAction.CallbackContext obj)
     {
         if (!_flying) return;
-        anim.SetTrigger("Turning");
+        _anim.SetTrigger(Turning);
         _velocity.x += -turnSpeed;
         _velocity.y += speed;
 
@@ -103,28 +140,39 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
-            
-        projectilesLeft = maxProjectiles;
+        /*poopManager.ReloadAllPoop();
+        _projectilesLeft = maxProjectiles;*/
+        
+        _timerReload.Start();
+        
+        
         _flying = false;
         _velocity = Vector2.zero;
-        anim.SetBool("Flying", false);
+        _anim.SetBool(Flying, false);
         print("platform touched");
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
+        
+        _timerReload.Pause();
+        
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
-        anim.SetBool("Flying", true);
+        _anim.SetBool(Flying, true);
         print("platform left");
     }
 
     // Update is called once per frame
     private void Update()
     {
-        anim.SetFloat("Speed", _velocity.y * animationSpeed);
-        timer.Update(Time.deltaTime);
+        _anim.SetFloat(Speed, _velocity.y * animationSpeed);
+        
+        _timer.Update(Time.deltaTime);
+        _timerSexyStare.Update(Time.deltaTime);
+        _timerReload.Update(Time.deltaTime);
+        
         if (!_flying)
         {
             transform.Rotate(Vector3.forward * (groundTurnSpeed * Time.deltaTime * _velocity.x));
