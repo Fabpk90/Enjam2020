@@ -10,6 +10,11 @@ public class PoopManager : MonoBehaviour
     private Stack<Image> _imageStack;
     private Stack<Image> _imageStackUsed;
 
+    private FMOD.Studio.EventInstance fmodinstance;
+
+    [FMODUnity.EventRef]
+    public string poopEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +31,8 @@ public class PoopManager : MonoBehaviour
     {
         var img = _imageStack.Pop();
         img.gameObject.SetActive(false);
-        
+        fmodinstance = FMODUnity.RuntimeManager.CreateInstance(poopEvent);
+        fmodinstance.start();
         _imageStackUsed.Push(img);
     }
 

@@ -1007,6 +1007,7 @@ MonoBehaviour:
   - {fileID: 4793153849214338953}
   - {fileID: 4793153849548297170}
   - {fileID: 4793153848666033162}
+  poopEvent: event:/SFX/Pigeon/SFX_Pigeon_Shitting
 --- !u!1 &4793153848666033160
 GameObject:
   m_ObjectHideFlags: 0

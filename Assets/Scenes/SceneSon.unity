@@ -625,9 +625,9 @@ GameObject:
   m_Component:
   - component: {fileID: 514645843}
   - component: {fileID: 514645842}
-  - component: {fileID: 514645841}
   - component: {fileID: 514645840}
   - component: {fileID: 514645844}
+  - component: {fileID: 514645841}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -669,14 +669,20 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!81 &514645841
-AudioListener:
+--- !u!114 &514645841
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514645839}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 514645839}
+  ListenerNumber: -1
 --- !u!20 &514645842
 Camera:
   m_ObjectHideFlags: 0
@@ -868,18 +874,6 @@ PrefabInstance:
     - target: {fileID: 2593566848641768807, guid: 0cc223ff2a061f94fa3e19177a71252e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593566848641768807, guid: 0cc223ff2a061f94fa3e19177a71252e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593566848641768807, guid: 0cc223ff2a061f94fa3e19177a71252e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593566848641768807, guid: 0cc223ff2a061f94fa3e19177a71252e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cc223ff2a061f94fa3e19177a71252e, type: 3}
@@ -1504,26 +1498,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4059390252547545523, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059390252547545523, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059390252547545523, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 4059390252547545532, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
       propertyPath: poopManager
       value: 
       objectReference: {fileID: 2142620104}
-    - target: {fileID: 4059390252547545532, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
-      propertyPath: minimumSpeed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ce9aec84c13ef14ab4a40c76e8959d7, type: 3}
 --- !u!4 &1896290580 stripped
