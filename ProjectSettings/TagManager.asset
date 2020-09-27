@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 907190969
     locked: 0
+  - name: People
+    uniqueID: 4025202913
+    locked: 0
   - name: Platform
     uniqueID: 2584877525
     locked: 0

@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour
     private bool targetFound = false;
     
     private SpriteRenderer _sprite;
-    private GameManager _gameManager;
     public LayerMask peopleToShitOn;
 
     private Collider2D _colliderAutoAim;
@@ -51,7 +50,7 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
-        _gameManager = FindObjectOfType<GameManager>();
+
         _sprite = GetComponent<SpriteRenderer>();
         _velocity = (targetPosition - transform.position) / lifeTime;
         _currentLifeTime = lifeTime;
@@ -84,7 +83,7 @@ public class Projectile : MonoBehaviour
         //Collision with people
         if (people)
         {
-            _gameManager.TargetHit();
+            print("hibou");
 
             HittableActor actor = people.GetComponent<HittableActor>();
 
@@ -108,8 +107,7 @@ public class Projectile : MonoBehaviour
                 return;
             }
         }
-        
-        _gameManager.TargetHit();
+        print("coucou");
 
         HittableActor actor = _colliderAutoAim.GetComponent<HittableActor>();
 

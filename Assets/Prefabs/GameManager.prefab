@@ -43,6 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c480aa09c53dd3647877806501e33227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gaugeTime: {fileID: 0}
-  additionalTime: 5
-  initialCountdown: 20
+  timeGauge: {fileID: 0}
+  gameOver: {fileID: 0}
+  scoreText: {fileID: 0}
+  additionalTime: 10
+  initialCountdown: 50
+  musicEvent: event:/Music/Music

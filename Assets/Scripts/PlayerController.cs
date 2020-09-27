@@ -154,7 +154,6 @@ public class PlayerController : MonoBehaviour
         _flying = false;
         _velocity = Vector2.zero;
         _anim.SetBool(Flying, false);
-        print("platform touched");
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -166,7 +165,6 @@ public class PlayerController : MonoBehaviour
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
         _anim.SetBool(Flying, true);
-        print("platform left");
     }
 
     // Update is called once per frame
