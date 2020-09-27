@@ -19,18 +19,16 @@ public class PlayerController : MonoBehaviour
 
     private CooldownTimer _timer;
     private CooldownTimer _timerSexyStare;
-
-    private CooldownTimer _timerReload;
-    public float reloadTime;
-
+    
     public PoopManager poopManager;
     
-    private float _projectilesLeft = 5;
     [Header("Shooting")] 
+    private CooldownTimer _timerReload;
+    public float reloadTime;
+    private float _projectilesLeft = 5;
     [SerializeField] private float cooldownShoot = 3;
     private Transform _target;
     public GameObject projectilePrefab;
-    [SerializeField] private float maxProjectiles = 5;
     [SerializeField] private float range = 1;
     
     [Header("Movement")]
@@ -39,7 +37,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float turnSpeed = 30;
     [SerializeField] private float turnSpeedDecreaseRate = 1;
     [SerializeField] private float flyAwaySpeed = 4;
-    [SerializeField] private float speed = 2;
+    [SerializeField] private float speedFactor = 2;
+    [SerializeField] private float minimumSpeed = 2;
     [SerializeField] private float speedDecreaseRate = 1;
     private static readonly int SexyStare = Animator.StringToHash("SexyStare");
     private static readonly int Flying = Animator.StringToHash("Flying");
@@ -77,8 +76,9 @@ public class PlayerController : MonoBehaviour
         };
     }
 
-    private void OnRestart(InputAction.CallbackContext obj)
+    private void OnDisable()
     {
+        print("coucou");
         _input.currentActionMap["FlapLeft"].performed -= OnFlapLeft;
         _input.currentActionMap["FlapRight"].performed -= OnFlapRight;
         _input.currentActionMap["Move"].performed -= OnMove;
@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Shit"].performed -= OnShitting;
         _input.currentActionMap["Fly"].performed -= OnFly;
         _input.currentActionMap["Restart"].performed -= OnRestart;
+    }
+
+    private void OnRestart(InputAction.CallbackContext obj)
+    {
         SceneManager.LoadScene(0);
     }
 
@@ -125,7 +129,7 @@ public class PlayerController : MonoBehaviour
         if (!_flying) return;
         _anim.SetTrigger(Turning);
         _velocity.x += turnSpeed;
-        _velocity.y += speed;
+        _velocity.y += speedFactor;
     }
     
     private void OnFlapLeft(InputAction.CallbackContext obj)
@@ -133,7 +137,7 @@ public class PlayerController : MonoBehaviour
         if (!_flying) return;
         _anim.SetTrigger(Turning);
         _velocity.x += -turnSpeed;
-        _velocity.y += speed;
+        _velocity.y += speedFactor;
 
     }
 
@@ -181,9 +185,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             _velocity.x = Mathf.Lerp(_velocity.x, 0, turnSpeedDecreaseRate * Time.deltaTime);
-            _velocity.y = Mathf.Lerp(_velocity.y, 0, speedDecreaseRate * Time.deltaTime);
+            _velocity.y = Mathf.Max(Mathf.Lerp(_velocity.y, 0, speedDecreaseRate * Time.deltaTime), minimumSpeed );
             transform.Rotate(Vector3.forward * (turnSpeed * Time.deltaTime * _velocity.x));
-            transform.Translate(Vector3.up * (speed * Time.deltaTime * _velocity.y));
+            transform.Translate(Vector3.up * (speedFactor * Time.deltaTime * _velocity.y));
         }
 
         _target.position = transform.position;
