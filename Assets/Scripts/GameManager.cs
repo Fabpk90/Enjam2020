@@ -104,12 +104,12 @@ public class GameManager : MonoBehaviour
         scoreText.text = _score.ToString(CultureInfo.InvariantCulture);
         
 
-        if (_score >= 1 && _score <= 3)
+        if (_score >= 500 && _score <= 1000)
         {
             fmodinstance.setParameterByName("Music_Intensity", 1);
         }
 
-        if (_score >= 4 && _score <= 8)
+        if (_score >= 1100)
         {
             fmodinstance.setParameterByName("Music_Intensity", 2);
         }

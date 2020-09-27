@@ -83,7 +83,7 @@ namespace UnityTemplateProjects.IA
         private void Update()
         {
             _timerAfraid.Update(Time.deltaTime);
-            dstTravelled += (_isAfraid ? movementSpeed * 2.0f : movementSpeed) * Time.deltaTime;
+            dstTravelled += (_isAfraid ? movementSpeed * 8.0f : movementSpeed) * Time.deltaTime;
             var newPos = path.path.GetPointAtDistance(dstTravelled, endAction);
             var direction = (newPos - transform.position).normalized;
 
