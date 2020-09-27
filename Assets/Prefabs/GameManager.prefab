@@ -48,4 +48,17 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   additionalTime: 10
   initialCountdown: 50
+  spawners: []
+  waves:
+  - amountToSpawn: 20
+    secondsBeforeSpawning: 3
+    scoreToReach: 100
+  - amountToSpawn: 50
+    secondsBeforeSpawning: 1
+    scoreToReach: 400
+  - amountToSpawn: 0
+    secondsBeforeSpawning: 0
+    scoreToReach: 0
+  _waveIndex: 0
   musicEvent: event:/Music/Music
+  scoreToAddOnShit: 100

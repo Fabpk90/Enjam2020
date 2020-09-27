@@ -1921,10 +1921,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
       propertyPath: timeGauge
       value: 
       objectReference: {fileID: 232730992}
@@ -1936,34 +1932,6 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 828448115}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.data[0].amountToSpawn
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.data[0].secondsBeforeSpawning
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.data[0].scoreToReach
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.data[1].amountToSpawn
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.data[1].secondsBeforeSpawning
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: waves.Array.data[1].scoreToReach
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
-      propertyPath: scoreToAddOnShit
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 7481115860658562011, guid: a79df158861ae764180638953dbabfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
