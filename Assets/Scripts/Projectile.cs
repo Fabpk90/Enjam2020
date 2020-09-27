@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public bool autoAim = false;
+    public float maxAngle = 10;
     public Vector3 targetPosition;
     private SpriteRenderer _sprite;
     private GameManager _gameManager;
@@ -18,6 +21,19 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (autoAim)
+        {
+            Collider2D collider = Physics2D.OverlapCircle(transform.position,
+                Vector3.Distance(transform.position, targetPosition));
+            if (collider)
+            {
+                float angle = Vector2.Dot(transform.forward ,(transform.position - collider.transform.position).normalized);
+                if (angle < maxAngle)
+                {
+                    targetPosition = collider.transform.position;
+                }
+            }
+        }
         _gameManager = FindObjectOfType<GameManager>();
         _sprite = GetComponent<SpriteRenderer>();
         _velocity = (targetPosition - transform.position) / lifeTime;
