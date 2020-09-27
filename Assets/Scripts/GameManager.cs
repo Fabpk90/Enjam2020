@@ -1,15 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using IA;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[Serializable]
+public struct Wave
+{
+    public int amountToSpawn;
+    public float secondsBeforeSpawning;
+    public int scoreToReach;
+}
+
 public class GameManager : MonoBehaviour
 {
     private CooldownTimer _finalCountdown;
-    private float _score = 0;
+    private uint _score = 0;
     private bool isGameOver = false;
     public Slider timeGauge;
     public GameObject gameOver;
@@ -18,11 +28,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float initialCountdown = 20;
 
     public static GameManager instance;
+    [HideInInspector]
+    public List<Spawner> spawners;
+
+    
+
+    public List<Wave> waves;
+    public int _waveIndex;
 
     private FMOD.Studio.EventInstance fmodinstance;
 
     [FMODUnity.EventRef]
     public string musicEvent;
+
+    public uint scoreToAddOnShit;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,12 +52,28 @@ public class GameManager : MonoBehaviour
         scoreText.text = "0";
         _finalCountdown = new CooldownTimer(initialCountdown);
         _finalCountdown.Start();
+
+        _waveIndex = -1;
     }
 
     void Start()
     {
         fmodinstance = FMODUnity.RuntimeManager.CreateInstance(musicEvent);
         fmodinstance.start();
+
+        Invoke("NextStage", 1.0f);
+    }
+
+    private void NextStage()
+    {
+        _waveIndex++;
+        int amountPerSpawner = waves[_waveIndex].amountToSpawn / spawners.Count;
+
+        foreach (var sp in spawners)
+        {
+            sp.NextWave(amountPerSpawner);
+            sp.spawnCooldown = waves[_waveIndex].secondsBeforeSpawning;
+        }
     }
 
     // Update is called once per frame
@@ -65,8 +100,9 @@ public class GameManager : MonoBehaviour
             timeToAdd = additionalTime;
         }
         _finalCountdown.AddTime(timeToAdd);
-        _score++;
+        _score += scoreToAddOnShit;
         scoreText.text = _score.ToString(CultureInfo.InvariantCulture);
+        
 
         if (_score >= 1 && _score <= 3)
         {
@@ -76,6 +112,12 @@ public class GameManager : MonoBehaviour
         if (_score >= 4 && _score <= 8)
         {
             fmodinstance.setParameterByName("Music_Intensity", 2);
+        }
+
+        if (_score >= waves[_waveIndex].scoreToReach)
+        {
+            print("Next stage");
+            NextStage();
         }
 
     }

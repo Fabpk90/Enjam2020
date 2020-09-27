@@ -25,9 +25,14 @@ namespace IA
             }
         }
 
+
+        public bool canBeHit;
+        
         public virtual void TakeDamage(int amount)
         {
-            if (health - amount <= 0)
+            if(!canBeHit) return;
+            
+            if(health - amount <= 0)
             {
                 poopHat.SetActive(true);
                 Death();
