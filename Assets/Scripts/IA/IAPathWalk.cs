@@ -1,4 +1,5 @@
 ﻿using System;
+using IA;
 using PathCreation;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,9 +23,13 @@ namespace UnityTemplateProjects.IA
         private Animator _animator;
         private static readonly int Speed = Animator.StringToHash("Speed");
 
+        private HittableActor _hittable;
+
         private void Start()
         {
             _animator = GetComponentInChildren<Animator>();
+            _hittable = GetComponent<HittableActor>();
+            
             GetComponentInChildren<SpriteRenderer>().color 
                 = Random.ColorHSV(0, 1, 0, 1, .5f, 1f);
             
@@ -36,8 +41,12 @@ namespace UnityTemplateProjects.IA
                 _isAfraid = false;
                 _animator.SetFloat(Speed, .50f);
             };
-            
-            MakeHimAfraid();
+
+            _hittable.OnDeath += (sender, args) =>
+            {
+                GameManager.instance.TargetHit();
+                Destroy(gameObject);
+            };
         }
 
         public void MakeHimAfraid()

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using IA;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -46,6 +47,13 @@ public class Projectile : MonoBehaviour
             Color color = people.gameObject.GetComponent<SpriteRenderer>().color;
             people.gameObject.GetComponent<SpriteRenderer>().color = color == Color.red ? Color.yellow : Color.red;
             _gameManager.TargetHit();
+
+            HittableActor actor = people.GetComponent<HittableActor>();
+
+            if (actor)
+            {
+                actor.TakeDamage(1);
+            }
         }
         Destroy(transform.gameObject);
     }
