@@ -99,4 +99,4 @@ MonoBehaviour:
   peopleToShitOn:
     serializedVersion: 2
     m_Bits: 512
-  lifeTime: 0.5
+  lifeTime: 0.2

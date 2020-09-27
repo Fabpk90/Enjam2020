@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/SoundbankFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637367381477265912
+  lastModified: 637367447474501017
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -60,7 +60,7 @@ MonoBehaviour:
   - {fileID: 2104915328634574843}
   StringsBanks:
   - {fileID: -6039193742099347498}
-  stringsBankWriteTime: 637367381477265912
+  stringsBankWriteTime: 637367447474501017
   cacheVersion: 5
 --- !u!114 &1313686104593167482
 MonoBehaviour:
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/SoundbankFmod/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637367381477809378
+  lastModified: 637367447474949815
   LoadResult: 0
   FileSizes: []
   Exists: 1
