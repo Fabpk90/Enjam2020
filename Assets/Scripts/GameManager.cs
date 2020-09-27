@@ -18,7 +18,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float initialCountdown = 20;
 
     public static GameManager instance;
-    
+
+    private FMOD.Studio.EventInstance fmodinstance;
+
+    [FMODUnity.EventRef]
+    public string musicEvent;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,6 +33,12 @@ public class GameManager : MonoBehaviour
         scoreText.text = "0";
         _finalCountdown = new CooldownTimer(initialCountdown);
         _finalCountdown.Start();
+    }
+
+    void Start()
+    {
+        fmodinstance = FMODUnity.RuntimeManager.CreateInstance(musicEvent);
+        fmodinstance.start();
     }
 
     // Update is called once per frame
@@ -56,12 +67,24 @@ public class GameManager : MonoBehaviour
         _finalCountdown.AddTime(timeToAdd);
         _score++;
         scoreText.text = _score.ToString(CultureInfo.InvariantCulture);
+
+        if (_score >= 1 && _score <= 3)
+        {
+            fmodinstance.setParameterByName("Music_Intensity", 1);
+        }
+
+        if (_score >= 4 && _score <= 8)
+        {
+            fmodinstance.setParameterByName("Music_Intensity", 2);
+        }
+
     }
     
     void GameOver()
     {
         isGameOver = true;
         gameOver.SetActive(true);
+        fmodinstance.setParameterByName("Music_Intensity", 4);
         Invoke(nameof(ReloadScene), 3);
     }
 
