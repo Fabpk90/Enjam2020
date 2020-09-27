@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  hitEvent: event:/SFX/Ennemies/NPC_Hit
   poopHat: {fileID: 2714225341784910812}
   umbrella: {fileID: 6126704280812410782}
 --- !u!1 &2714225341784910812

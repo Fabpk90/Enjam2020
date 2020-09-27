@@ -8,6 +8,12 @@ namespace IA
     {
         public int health;
         public EventHandler OnDeath;
+
+        [FMODUnity.EventRef]
+        public string hitEvent;
+
+        private FMOD.Studio.EventInstance fmodinstance;
+
         public GameObject poopHat;
         public Animator umbrella;
         public bool canBeHit = true;
