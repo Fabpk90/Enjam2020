@@ -142,3 +142,4 @@ sysinfo.txt
 IncrementalSoundBankData.xml
 
 # End of https://www.gitignore.io/api/rider,unity
+fmod_editor.log

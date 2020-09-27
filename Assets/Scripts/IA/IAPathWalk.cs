@@ -1,42 +1,71 @@
 ﻿using System;
+using IA;
+using PathCreation;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace UnityTemplateProjects.IA
 {
     public class IAPathWalk : MonoBehaviour
     {
-        public Transform[] points;
-        private int _indexPoint;
+        public PathCreator path;
 
-        private Vector3 _nextPosition;
-        
-        public bool isMoving;
         public float movementSpeed;
+        float dstTravelled;
 
-        private Animator _stateMachine;
-        private static readonly int ArrivedAtPoint = Animator.StringToHash("ArrivedAtPoint");
+        private bool _isAfraid;
+        private CooldownTimer _timerAfraid;
+
+        public float timerCooldown;
+        
+        public EndOfPathInstruction endAction;
+
+        private Animator _animator;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
+        private HittableActor _hittable;
 
         private void Start()
         {
-            _stateMachine = GetComponent<Animator>();
-            _stateMachine.GetBehaviour<PointChooser>().ia = this;
+            _animator = GetComponentInChildren<Animator>();
+            _hittable = GetComponent<HittableActor>();
             
-            _indexPoint = 0;
+            GetComponentInChildren<SpriteRenderer>().color 
+                = Random.ColorHSV(0, 1, 0, 1, .5f, 1f);
+            
+            _animator.SetFloat(Speed, .50f);
+            
+            _timerAfraid = new CooldownTimer(timerCooldown);
+            _timerAfraid.TimerCompleteEvent += () =>
+            {
+                _isAfraid = false;
+                _animator.SetFloat(Speed, .50f);
+            };
+
+            _hittable.OnDeath += (sender, args) =>
+            {
+                GameManager.instance.TargetHit();
+                Destroy(gameObject);
+            };
+        }
+
+        public void MakeHimAfraid()
+        {
+            _timerAfraid.Start();
+            _isAfraid = true;
+            _animator.SetFloat(Speed, 1.0f);
         }
 
         private void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _nextPosition, Time.deltaTime * movementSpeed);
-            
-            if(Vector3.Distance(transform.position, _nextPosition) < 0.25f)
-                _stateMachine.SetTrigger(ArrivedAtPoint);
-        }
+            _timerAfraid.Update(Time.deltaTime);
+            dstTravelled += (_isAfraid ? movementSpeed * 2.0f : movementSpeed) * Time.deltaTime;
+            var newPos = path.path.GetPointAtDistance(dstTravelled, endAction);
+            var direction = (newPos - transform.position).normalized;
 
-        public void ChooseNextPoint()
-        {
-            _indexPoint = (_indexPoint + 1) % points.Length;
-
-            _nextPosition = points[_indexPoint].position;
+            transform.position = newPos;
+            transform.right = direction;
+            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
         }
     }
 }
