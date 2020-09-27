@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using IA;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -60,6 +61,13 @@ public class Projectile : MonoBehaviour
         if (people)
         {
             _gameManager.TargetHit();
+
+            HittableActor actor = people.GetComponent<HittableActor>();
+
+            if (actor)
+            {
+                actor.TakeDamage(1);
+            }
         }
         Destroy(transform.gameObject);
     }

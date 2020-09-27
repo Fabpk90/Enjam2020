@@ -16,9 +16,15 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     [SerializeField] private float additionalTime = 5;
     [SerializeField] private float initialCountdown = 20;
+
+    public static GameManager instance;
+    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        if(instance == null)
+            instance = this;
+        
         scoreText.text = "0";
         _finalCountdown = new CooldownTimer(initialCountdown);
         _finalCountdown.Start();
