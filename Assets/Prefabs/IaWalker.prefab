@@ -116,6 +116,7 @@ MonoBehaviour:
   hitEvent: event:/SFX/Ennemies/NPC_Hit
   poopHat: {fileID: 2714225341784910812}
   umbrella: {fileID: 6126704280812410782}
+  canBeHit: 1
 --- !u!1 &2714225341784910812
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e1303918f3f7b4f9b7404281255aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  closeEvent: event:/SFX/Ennemies/NPC_CloseUmbrella
 --- !u!1 &7986770682738071955
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ GameObject:
   - component: {fileID: 6134647837090916260}
   - component: {fileID: 2651801603661038921}
   - component: {fileID: 8739244802455359826}
+  - component: {fileID: 6025302799419434260}
   m_Layer: 0
   m_Name: NPCAnim
   m_TagString: Untagged
@@ -415,3 +418,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6025302799419434260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986770682738071955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Ennemies/NPC_Walking
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
