@@ -37,11 +37,8 @@ public class Projectile : MonoBehaviour
             
             if (_colliderAutoAim)
             {
-                print("Collider found");
                 if (Vector3.Distance(_colliderAutoAim.transform.position, transform.position) > minRange)
                 {
-                    print(transform.up);
-                    print("Distance sufficient");
                     float cosAngle = Vector2.Dot(transform.up,
                         (_colliderAutoAim.transform.position - transform.position).normalized);
                     float angle = Mathf.Rad2Deg * Mathf.Acos(cosAngle);
@@ -50,7 +47,6 @@ public class Projectile : MonoBehaviour
                     {
                         targetPosition = _colliderAutoAim.transform.position;
                         targetFound = true;
-                        print("target found");
                     }
                 }
             }
