@@ -114,7 +114,8 @@ public class GameManager : MonoBehaviour
             fmodinstance.setParameterByName("Music_Intensity", 2);
         }
 
-        if (_score >= waves[_waveIndex].scoreToReach)
+        if (_score >= waves[_waveIndex].scoreToReach
+        && _waveIndex != waves.Count - 1)
         {
             print("Next stage");
             NextStage();

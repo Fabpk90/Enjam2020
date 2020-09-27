@@ -1932,6 +1932,18 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 828448115}
+    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
+      propertyPath: waves.Array.data[0].scoreToReach
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
+      propertyPath: waves.Array.data[1].scoreToReach
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481115860658562010, guid: a79df158861ae764180638953dbabfea, type: 3}
+      propertyPath: waves.Array.data[2].scoreToReach
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7481115860658562011, guid: a79df158861ae764180638953dbabfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
