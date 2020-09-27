@@ -144,20 +144,28 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
-        /*poopManager.ReloadAllPoop();
-        _projectilesLeft = maxProjectiles;*/
+        if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding"))
+        {
+            //out of bound
+            transform.Rotate(180, 0, 0);
+        }
+        else
+        {
+            //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
+            /*poopManager.ReloadAllPoop();
+            _projectilesLeft = maxProjectiles;*/
         
-        _timerReload.Start();
-        
-        
-        _flying = false;
-        _velocity = Vector2.zero;
-        _anim.SetBool(Flying, false);
+            _timerReload.Start();
+
+            _flying = false;
+            _velocity = Vector2.zero;
+            _anim.SetBool(Flying, false);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding")) return;
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         
         _timerReload.Pause();
