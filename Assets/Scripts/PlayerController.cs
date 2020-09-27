@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float animationSpeed = 1;
 
     private CooldownTimer timer;
-
     private CooldownTimer timerSexyStare;
+
+    public PoopManager poopManager;
     
     private float projectilesLeft = 5;
     [Header("Shooting")] 
@@ -91,7 +92,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!_flying || projectilesLeft == 0 || !timer.IsCompleted) return;
         timer.Start(cooldownShoot);
+        
+        poopManager.UsePoop();
+        
         projectilesLeft--;
+        
         GameObject projectile = Instantiate(projectilePrefab) as GameObject;;
         projectile.transform.position = transform.position;
         Projectile p = projectile.GetComponent<Projectile>();
@@ -126,7 +131,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
-            
+        poopManager.ReloadAllPoop();
         projectilesLeft = maxProjectiles;
         _flying = false;
         _velocity = Vector2.zero;
