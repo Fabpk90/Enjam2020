@@ -41,6 +41,8 @@ namespace IA
             {
                 poopHat.SetActive(true);
                 Death();
+                fmodinstance = FMODUnity.RuntimeManager.CreateInstance(hitEvent);
+                fmodinstance.start();
             }
             else if(health - amount == 1)
             {
