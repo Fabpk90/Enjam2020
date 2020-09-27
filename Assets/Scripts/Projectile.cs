@@ -83,7 +83,6 @@ public class Projectile : MonoBehaviour
         //Collision with people
         if (people)
         {
-            print("hibou");
 
             HittableActor actor = people.GetComponent<HittableActor>();
 
@@ -107,7 +106,6 @@ public class Projectile : MonoBehaviour
                 return;
             }
         }
-        print("coucou");
 
         HittableActor actor = _colliderAutoAim.GetComponent<HittableActor>();
 
