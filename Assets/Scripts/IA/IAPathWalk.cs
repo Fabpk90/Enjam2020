@@ -49,6 +49,22 @@ namespace UnityTemplateProjects.IA
             };
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("parasol"))
+            {
+                _hittable.canBeHit = false;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("parasol"))
+            {
+                _hittable.canBeHit = true;
+            }
+        }
+
         public void MakeHimAfraid()
         {
             _timerAfraid.Start();

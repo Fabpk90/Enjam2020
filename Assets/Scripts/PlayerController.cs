@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.gameObject.layer == LayerMask.NameToLayer("parasol")) return;
         if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding"))
         {
             //out of bound
@@ -165,6 +166,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if(other.gameObject.layer == LayerMask.NameToLayer("parasol")) return;
         if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding")) return;
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         
