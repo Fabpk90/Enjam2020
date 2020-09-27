@@ -19,14 +19,13 @@ public class PlayerController : MonoBehaviour
 
     private CooldownTimer _timer;
     private CooldownTimer _timerSexyStare;
-
-    private CooldownTimer _timerReload;
-    public float reloadTime;
-
+    
     public PoopManager poopManager;
     
-    private float _projectilesLeft = 5;
     [Header("Shooting")] 
+    private CooldownTimer _timerReload;
+    public float reloadTime;
+    private float _projectilesLeft = 5;
     [SerializeField] private float cooldownShoot = 3;
     private Transform _target;
     public GameObject projectilePrefab;
@@ -77,8 +76,9 @@ public class PlayerController : MonoBehaviour
         };
     }
 
-    private void OnRestart(InputAction.CallbackContext obj)
+    private void OnDisable()
     {
+        print("coucou");
         _input.currentActionMap["FlapLeft"].performed -= OnFlapLeft;
         _input.currentActionMap["FlapRight"].performed -= OnFlapRight;
         _input.currentActionMap["Move"].performed -= OnMove;
@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Shit"].performed -= OnShitting;
         _input.currentActionMap["Fly"].performed -= OnFly;
         _input.currentActionMap["Restart"].performed -= OnRestart;
+    }
+
+    private void OnRestart(InputAction.CallbackContext obj)
+    {
         SceneManager.LoadScene(0);
     }
 
@@ -181,7 +185,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _velocity.x = Mathf.Lerp(_velocity.x, 0, turnSpeedDecreaseRate * Time.deltaTime);
-            _velocity.y = Mathf.Max(Mathf.Lerp(_velocity.y, 0, speedDecreaseRate * Time.deltaTime), minimumSpeed);
+            _velocity.y = Mathf.Max(Mathf.Lerp(_velocity.y, 0, speedDecreaseRate * Time.deltaTime), minimumSpeed );
             transform.Rotate(Vector3.forward * (turnSpeed * Time.deltaTime * _velocity.x));
             transform.Translate(Vector3.up * (speedFactor * Time.deltaTime * _velocity.y));
         }

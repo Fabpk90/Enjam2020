@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     private CooldownTimer _finalCountdown;
     private float _score = 0;
+    private bool isGameOver = false;
     public Slider timeGauge;
     public GameObject gameOver;
     public TextMeshProUGUI scoreText;
@@ -30,19 +31,30 @@ public class GameManager : MonoBehaviour
         timeGauge.value = Mathf.Clamp(_finalCountdown.TimeRemaining / initialCountdown, 0,1);
         if (_finalCountdown.IsCompleted)
         {
+            if (isGameOver) return;
             GameOver();
         }
     }
 
     public void TargetHit()
     {
-        _finalCountdown.AddTime(additionalTime);
+        float timeToAdd;
+        if ((additionalTime + _finalCountdown.TimeRemaining) >= initialCountdown)
+        {
+            timeToAdd = initialCountdown - _finalCountdown.TimeRemaining;
+        }
+        else
+        {
+            timeToAdd = additionalTime;
+        }
+        _finalCountdown.AddTime(timeToAdd);
         _score++;
         scoreText.text = _score.ToString(CultureInfo.InvariantCulture);
     }
     
     void GameOver()
     {
+        isGameOver = true;
         gameOver.SetActive(true);
         Invoke(nameof(ReloadScene), 3);
     }
