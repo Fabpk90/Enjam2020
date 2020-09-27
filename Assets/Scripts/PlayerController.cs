@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        print("coucou");
         _input.currentActionMap["FlapLeft"].performed -= OnFlapLeft;
         _input.currentActionMap["FlapRight"].performed -= OnFlapRight;
         _input.currentActionMap["Move"].performed -= OnMove;
@@ -112,9 +111,11 @@ public class PlayerController : MonoBehaviour
         
         GameObject projectile = Instantiate(projectilePrefab) as GameObject;;
         projectile.transform.position = transform.position;
+        projectile.transform.rotation = transform.rotation;
         Projectile p = projectile.GetComponent<Projectile>();
         if (p != null)
         {
+            
             p.targetPosition = _target.transform.position;
         }
     }

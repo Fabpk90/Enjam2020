@@ -8,11 +8,18 @@ public class Projectile : MonoBehaviour
 {
     public bool autoAim = false;
     public float maxAngle = 10;
+    
     public Vector3 targetPosition;
+    private bool targetFound = false;
+    
     private SpriteRenderer _sprite;
     private GameManager _gameManager;
     public LayerMask peopleToShitOn;
 
+    private Collider2D _colliderAutoAim;
+    
+    public float minRange = 0.5f;
+    
     [SerializeField] private float sizeColliderFactor = 1;
     [SerializeField] private float lifeTime = 0.5f;
 
@@ -24,17 +31,27 @@ public class Projectile : MonoBehaviour
     {
         if (autoAim)
         {
-            Collider2D collider = Physics2D.OverlapCircle(transform.position,
+            _colliderAutoAim = Physics2D.OverlapCircle(transform.position,
                 Vector3.Distance(transform.position, targetPosition),
                 peopleToShitOn);
             
-            if (collider)
+            if (_colliderAutoAim)
             {
-                print(collider.name);
-                float angle = Vector2.Dot(transform.forward ,(transform.position - collider.transform.position).normalized);
-                if (angle < maxAngle)
+                print("Collider found");
+                if (Vector3.Distance(_colliderAutoAim.transform.position, transform.position) > minRange)
                 {
-                    targetPosition = collider.transform.position;
+                    print(transform.up);
+                    print("Distance sufficient");
+                    float cosAngle = Vector2.Dot(transform.up,
+                        (_colliderAutoAim.transform.position - transform.position).normalized);
+                    float angle = Mathf.Rad2Deg * Mathf.Acos(cosAngle);
+                    print(angle);
+                    if (Mathf.Abs(angle) < maxAngle)
+                    {
+                        targetPosition = _colliderAutoAim.transform.position;
+                        targetFound = true;
+                        print("target found");
+                    }
                 }
             }
         }
@@ -50,10 +67,18 @@ public class Projectile : MonoBehaviour
         _currentLifeTime -= Time.deltaTime;
         if (_currentLifeTime < 0)
         {
-            Hit();
+            if (autoAim)
+            {
+                HitAutoAim();
+            }
+            else
+            {
+                Hit();
+            }
             return;
         }
-        transform.Translate(new Vector3(_velocity.x, _velocity.y, 0) * Time.deltaTime);
+        
+        transform.Translate(new Vector3(_velocity.x, _velocity.y, 0) * Time.deltaTime, Space.World);
         transform.localScale = Vector3.one * Mathf.Lerp(5f, 2f, 1 - (_currentLifeTime / lifeTime));
     }
 
@@ -73,5 +98,36 @@ public class Projectile : MonoBehaviour
             }
         }
         Destroy(transform.gameObject);
+    }
+
+    private void HitAutoAim()
+    {
+        if (!targetFound)
+        {
+            _colliderAutoAim = Physics2D.OverlapCircle(transform.position, _sprite.size.x * sizeColliderFactor, peopleToShitOn);
+
+            if (!_colliderAutoAim)
+            {
+                Destroy(transform.gameObject);
+                return;
+            }
+        }
+        
+        _gameManager.TargetHit();
+
+        HittableActor actor = _colliderAutoAim.GetComponent<HittableActor>();
+
+        if (actor)
+        {
+            actor.TakeDamage(1);
+        }
+        Destroy(transform.gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position,  Quaternion.AngleAxis(maxAngle, Vector3.forward) * transform.rotation * Vector3.up * 4);
+        Gizmos.DrawRay(transform.position,  Quaternion.AngleAxis(-maxAngle, Vector3.forward) * transform.rotation * Vector3.up * 4);
     }
 }
