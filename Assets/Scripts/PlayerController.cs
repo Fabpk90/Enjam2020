@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 2;
     [SerializeField] private float speedDecreaseRate = 1;
     private static readonly int SexyStare = Animator.StringToHash("SexyStare");
+    private static readonly int Flying = Animator.StringToHash("Flying");
+    private static readonly int Turning = Animator.StringToHash("Turning");
+    private static readonly int Speed = Animator.StringToHash("Speed");
 
     // Start is called before the first frame update
     private void Start()
@@ -66,6 +69,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnRestart(InputAction.CallbackContext obj)
     {
+        _input.currentActionMap["FlapLeft"].performed -= OnFlapLeft;
+        _input.currentActionMap["FlapRight"].performed -= OnFlapRight;
+        _input.currentActionMap["Move"].performed -= OnMove;
+        _input.currentActionMap["Move"].canceled -= OnMove;
+        _input.currentActionMap["Shit"].performed -= OnShitting;
+        _input.currentActionMap["Fly"].performed -= OnFly;
+        _input.currentActionMap["Restart"].performed -= OnRestart;
         SceneManager.LoadScene(0);
     }
 
@@ -74,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (_flying) return;
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
-        anim.SetBool("Flying", true);
+        anim.SetBool(Flying, true);
     }
 
     private void OnShitting (InputAction.CallbackContext obj)
@@ -99,7 +109,7 @@ public class PlayerController : MonoBehaviour
     private void OnFlapRight(InputAction.CallbackContext obj)
     {
         if (!_flying) return;
-        anim.SetTrigger("Turning");
+        anim.SetTrigger(Turning);
         _velocity.x += turnSpeed;
         _velocity.y += speed;
     }
@@ -107,7 +117,7 @@ public class PlayerController : MonoBehaviour
     private void OnFlapLeft(InputAction.CallbackContext obj)
     {
         if (!_flying) return;
-        anim.SetTrigger("Turning");
+        anim.SetTrigger(Turning);
         _velocity.x += -turnSpeed;
         _velocity.y += speed;
 
@@ -120,7 +130,7 @@ public class PlayerController : MonoBehaviour
         projectilesLeft = maxProjectiles;
         _flying = false;
         _velocity = Vector2.zero;
-        anim.SetBool("Flying", false);
+        anim.SetBool(Flying, false);
         print("platform touched");
     }
 
@@ -129,14 +139,14 @@ public class PlayerController : MonoBehaviour
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
-        anim.SetBool("Flying", true);
+        anim.SetBool(Flying, true);
         print("platform left");
     }
 
     // Update is called once per frame
     private void Update()
     {
-        anim.SetFloat("Speed", _velocity.y * animationSpeed);
+        anim.SetFloat(Speed, _velocity.y * animationSpeed);
         timer.Update(Time.deltaTime);
         timerSexyStare.Update(Time.deltaTime);
         if (!_flying)
