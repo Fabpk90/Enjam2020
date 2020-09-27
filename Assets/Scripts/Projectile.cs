@@ -25,9 +25,12 @@ public class Projectile : MonoBehaviour
         if (autoAim)
         {
             Collider2D collider = Physics2D.OverlapCircle(transform.position,
-                Vector3.Distance(transform.position, targetPosition));
+                Vector3.Distance(transform.position, targetPosition),
+                peopleToShitOn);
+            
             if (collider)
             {
+                print(collider.name);
                 float angle = Vector2.Dot(transform.forward ,(transform.position - collider.transform.position).normalized);
                 if (angle < maxAngle)
                 {

@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoAim: 1
-  maxAngle: 60
+  maxAngle: 10
   targetPosition: {x: 0, y: 0, z: 0}
   peopleToShitOn:
     serializedVersion: 2
