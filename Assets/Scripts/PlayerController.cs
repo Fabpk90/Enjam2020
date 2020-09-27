@@ -58,8 +58,7 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Move"].canceled += OnMove;
         _input.currentActionMap["Shit"].performed += OnShitting;
         _input.currentActionMap["Fly"].performed += OnFly;
-        _input.currentActionMap["Restart"].performed += OnRestart;
-        
+
         _timerSexyStare = new CooldownTimer(5.0f, true);
         _timerSexyStare.TimerCompleteEvent += () =>
         {
@@ -84,13 +83,8 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Move"].canceled -= OnMove;
         _input.currentActionMap["Shit"].performed -= OnShitting;
         _input.currentActionMap["Fly"].performed -= OnFly;
-        _input.currentActionMap["Restart"].performed -= OnRestart;
     }
-
-    private void OnRestart(InputAction.CallbackContext obj)
-    {
-        SceneManager.LoadScene(0);
-    }
+    
 
     private void OnFly (InputAction.CallbackContext obj)
     {
@@ -144,6 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.gameObject.layer == LayerMask.NameToLayer("parasol")) return;
         if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding"))
         {
             //out of bound
@@ -165,6 +160,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if(other.gameObject.layer == LayerMask.NameToLayer("parasol")) return;
         if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding")) return;
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         
@@ -178,6 +174,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+        
         _anim.SetFloat(Speed, _velocity.y * animationSpeed);
         
         _timer.Update(Time.deltaTime);

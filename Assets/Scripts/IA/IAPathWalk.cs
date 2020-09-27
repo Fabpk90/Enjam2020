@@ -2,6 +2,7 @@
 using IA;
 using PathCreation;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace UnityTemplateProjects.IA
@@ -45,8 +46,31 @@ namespace UnityTemplateProjects.IA
             _hittable.OnDeath += (sender, args) =>
             {
                 GameManager.instance.TargetHit();
-                Destroy(gameObject);
+                _isAfraid = true;
+                _animator.SetFloat(Speed, 1.0f);
+                Invoke(nameof(Kill), 5);
             };
+        }
+
+        void Kill()
+        {
+            Destroy(gameObject);
+        }
+        
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("parasol"))
+            {
+                _hittable.canBeHit = false;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("parasol"))
+            {
+                _hittable.canBeHit = true;
+            }
         }
 
         public void MakeHimAfraid()
