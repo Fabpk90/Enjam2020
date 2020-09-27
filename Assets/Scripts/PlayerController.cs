@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _anim = GetComponent<Animator>();
+        _anim = GetComponentInChildren<Animator>();
         _target = transform.GetChild(0).transform;
         _timer = new CooldownTimer(0);
         _input = GetComponent<PlayerInput>();
@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        print("coucou");
         _input.currentActionMap["FlapLeft"].performed -= OnFlapLeft;
         _input.currentActionMap["FlapRight"].performed -= OnFlapRight;
         _input.currentActionMap["Move"].performed -= OnMove;
@@ -112,9 +111,11 @@ public class PlayerController : MonoBehaviour
         
         GameObject projectile = Instantiate(projectilePrefab) as GameObject;;
         projectile.transform.position = transform.position;
+        projectile.transform.rotation = transform.rotation;
         Projectile p = projectile.GetComponent<Projectile>();
         if (p != null)
         {
+            
             p.targetPosition = _target.transform.position;
         }
     }
@@ -143,21 +144,28 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
-        /*poopManager.ReloadAllPoop();
-        _projectilesLeft = maxProjectiles;*/
+        if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding"))
+        {
+            //out of bound
+            transform.Rotate(180, 0, 0);
+        }
+        else
+        {
+            //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
+            /*poopManager.ReloadAllPoop();
+            _projectilesLeft = maxProjectiles;*/
         
-        _timerReload.Start();
-        
-        
-        _flying = false;
-        _velocity = Vector2.zero;
-        _anim.SetBool(Flying, false);
-        print("platform touched");
+            _timerReload.Start();
+
+            _flying = false;
+            _velocity = Vector2.zero;
+            _anim.SetBool(Flying, false);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("OutOfBounding")) return;
         //if (other.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         
         _timerReload.Pause();
@@ -165,7 +173,6 @@ public class PlayerController : MonoBehaviour
         _flying = true;
         _velocity = Vector2.up * flyAwaySpeed;
         _anim.SetBool(Flying, true);
-        print("platform left");
     }
 
     // Update is called once per frame

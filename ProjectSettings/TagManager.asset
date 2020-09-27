@@ -15,7 +15,7 @@ TagManager:
   - 
   - Platform
   - People
-  - 
+  - OutOfBounding
   - 
   - 
   - 
@@ -40,6 +40,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 907190969
+    locked: 0
+  - name: People
+    uniqueID: 4025202913
     locked: 0
   - name: Platform
     uniqueID: 2584877525

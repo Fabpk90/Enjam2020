@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 761805521
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.075834274, g: 1, b: 0, a: 1}
@@ -95,8 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dbbce6fe5109949832f5381f06aa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoAim: 1
+  maxAngle: 20
   targetPosition: {x: 0, y: 0, z: 0}
   peopleToShitOn:
     serializedVersion: 2
     m_Bits: 512
-  lifeTime: 0.2
+  minRange: 0.5
+  sizeColliderFactor: 1
+  lifeTime: 0.5
