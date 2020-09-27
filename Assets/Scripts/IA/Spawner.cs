@@ -29,6 +29,8 @@ namespace IA
             };
             
             _timerToRespawn.Start();
+            
+            GameManager.instance.spawners.Add(this);
         }
 
         public void NextWave(int amountToSpawn)
