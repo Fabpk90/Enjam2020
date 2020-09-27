@@ -44,8 +44,6 @@ public class Projectile : MonoBehaviour
         //Collision with people
         if (people)
         {
-            Color color = people.gameObject.GetComponent<SpriteRenderer>().color;
-            people.gameObject.GetComponent<SpriteRenderer>().color = color == Color.red ? Color.yellow : Color.red;
             _gameManager.TargetHit();
 
             HittableActor actor = people.GetComponent<HittableActor>();
