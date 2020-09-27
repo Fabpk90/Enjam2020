@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using IA;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -125,6 +126,16 @@ public class GameManager : MonoBehaviour
     
     void GameOver()
     {
+        var score = PlayerPrefs.GetInt("Score");
+
+        if (score <= _score)
+        {
+            PlayerPrefs.SetInt("BestScore", 1);
+            PlayerPrefs.SetInt("Score", score);
+            
+            PlayerPrefs.Save();
+        }
+        
         isGameOver = true;
         gameOver.SetActive(true);
         fmodinstance.setParameterByName("Music_Intensity", 4);
@@ -133,7 +144,7 @@ public class GameManager : MonoBehaviour
 
     void ReloadScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
     
 }
