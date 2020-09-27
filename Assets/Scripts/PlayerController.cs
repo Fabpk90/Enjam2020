@@ -174,6 +174,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+        
         _anim.SetFloat(Speed, _velocity.y * animationSpeed);
         
         _timer.Update(Time.deltaTime);
