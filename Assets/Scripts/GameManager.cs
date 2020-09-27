@@ -20,7 +20,7 @@ public struct Wave
 public class GameManager : MonoBehaviour
 {
     private CooldownTimer _finalCountdown;
-    private uint _score = 0;
+    private int _score = 0;
     private bool isGameOver = false;
     public Slider timeGauge;
     public GameObject gameOver;
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
             timeToAdd = additionalTime;
         }
         _finalCountdown.AddTime(timeToAdd);
-        _score += scoreToAddOnShit;
+        _score += (int) scoreToAddOnShit;
         scoreText.text = _score.ToString(CultureInfo.InvariantCulture);
         
 
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         if (score <= _score)
         {
             PlayerPrefs.SetInt("BestScore", 1);
-            PlayerPrefs.SetInt("Score", score);
+            PlayerPrefs.SetInt("Score", _score);
             
             PlayerPrefs.Save();
         }
