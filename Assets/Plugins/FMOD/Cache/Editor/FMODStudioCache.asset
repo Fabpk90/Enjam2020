@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/SoundbankFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637368436771541729
+  lastModified: 637368439117953688
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -314,7 +314,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 4179067578762836348}
+  - {fileID: 3963148705296592926}
   MinDistance: 0
   MaxDistance: 0
   Length: 153874
@@ -585,7 +585,7 @@ MonoBehaviour:
   - {fileID: 2104915328634574843}
   StringsBanks:
   - {fileID: -6039193742099347498}
-  stringsBankWriteTime: 637368436771541729
+  stringsBankWriteTime: 637368439117953688
   cacheVersion: 5
 --- !u!114 &1206537553816513993
 MonoBehaviour:
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/SoundbankFmod/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637368436771461956
+  lastModified: 637368439118392510
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -793,6 +793,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &3963148705296592926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Music_Intensity
+  m_EditorClassIdentifier: 
+  Name: Music_Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &4141434198876793861
 MonoBehaviour:
   m_ObjectHideFlags: 0
