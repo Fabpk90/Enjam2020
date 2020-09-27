@@ -1527,7 +1527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2138260788052416857, guid: 24c7225ad7875a049b9b320a8fdd98f4, type: 3}
       propertyPath: Event
-      value: event:/Music/Music
+      value: event:/Amb/Amb_CityPark
       objectReference: {fileID: 0}
     - target: {fileID: 2329422476352679067, guid: 24c7225ad7875a049b9b320a8fdd98f4, type: 3}
       propertyPath: m_LocalPosition.x

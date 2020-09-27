@@ -58,8 +58,7 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Move"].canceled += OnMove;
         _input.currentActionMap["Shit"].performed += OnShitting;
         _input.currentActionMap["Fly"].performed += OnFly;
-        _input.currentActionMap["Restart"].performed += OnRestart;
-        
+
         _timerSexyStare = new CooldownTimer(5.0f, true);
         _timerSexyStare.TimerCompleteEvent += () =>
         {
@@ -84,13 +83,8 @@ public class PlayerController : MonoBehaviour
         _input.currentActionMap["Move"].canceled -= OnMove;
         _input.currentActionMap["Shit"].performed -= OnShitting;
         _input.currentActionMap["Fly"].performed -= OnFly;
-        _input.currentActionMap["Restart"].performed -= OnRestart;
     }
-
-    private void OnRestart(InputAction.CallbackContext obj)
-    {
-        SceneManager.LoadScene(0);
-    }
+    
 
     private void OnFly (InputAction.CallbackContext obj)
     {

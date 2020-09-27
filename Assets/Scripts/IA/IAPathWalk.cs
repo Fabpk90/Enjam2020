@@ -2,6 +2,7 @@
 using IA;
 using PathCreation;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace UnityTemplateProjects.IA
@@ -45,10 +46,17 @@ namespace UnityTemplateProjects.IA
             _hittable.OnDeath += (sender, args) =>
             {
                 GameManager.instance.TargetHit();
-                Destroy(gameObject);
+                _isAfraid = true;
+                _animator.SetFloat(Speed, 1.0f);
+                Invoke(nameof(Kill), 5);
             };
         }
 
+        void Kill()
+        {
+            Destroy(gameObject);
+        }
+        
         public void MakeHimAfraid()
         {
             _timerAfraid.Start();
